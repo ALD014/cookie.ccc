@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный дневник</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .task-item {
+      background-color: #fff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+    }
+    .task-item button {
+      background-color: #ff6347;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .task-item button:hover {
+      background-color: #ff4500;
+    }
+  </style>
+</head>
+<body>
+  <h1>Личный дневник</h1>
+  <input type="text" id="taskInput" placeholder="Введите задачу" />
+  <button onclick="addTask()">Добавить задачу</button>
+  <ul id="taskList" class="task-list"></ul>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskText = taskInput.value.trim();
+      if (taskText === '') {
+        alert('Пожалуйста, введите задачу.');
+        return;
+      }
+
+      const taskList = document.getElementById('taskList');
+      const taskItem = document.createElement('li');
+      taskItem.className = 'task-item';
+      taskItem.innerHTML = `
+        <span>${taskText}</span>
+        <button onclick="deleteTask(this)">Удалить</button>
+      `;
+      taskList.appendChild(taskItem);
+      taskInput.value = '';
+    }
+
+    function deleteTask(button) {
+      const taskItem = button.parentNode;
+      taskItem.remove();
+    }
+  </script>
+</body>
+</html>
